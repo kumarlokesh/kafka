@@ -885,7 +885,7 @@ public class DefaultStateUpdater implements StateUpdater {
                 restoredActiveTasksLock.lock();
                 try {
                     while (restoredActiveTasks.isEmpty() && now <= deadline) {
-                        final boolean elapsed = restoredActiveTasksCondition.await(deadline - now, TimeUnit.MILLISECONDS);
+                        restoredActiveTasksCondition.await(deadline - now, TimeUnit.MILLISECONDS);
                         now = time.milliseconds();
                     }
                     result.addAll(restoredActiveTasks);
